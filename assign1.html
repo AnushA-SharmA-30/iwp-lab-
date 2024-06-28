@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background-color: #ffe6b9;
+        }
+
+        .container {
+            margin-top: 100px;
+            padding: 20px;
+            background-color: rgb(66, 200, 196);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(181, 135, 135, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(136, 10, 18);
+        }
+
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .answer-option {
+
+            margin-bottom: 20px;
+            background-color: rgb(149, 225, 154);
+            width: 200px;
+            padding: 10px;
+            box-shadow: 0 0 8px rgba(106, 96, 96, 0.1);
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            display: flex;
+            justify-content: center;
+            padding: 8px 20px;
+            border: none;
+            background-color: rgb(0, 102, 255);
+            color: rgb(255, 166, 208);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(68, 0, 23);
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quiz</h1>
+        <p class="question" id="question"></p>
+        <div class="options">
+            <div class="answer-options" id="options"></div>
+        </div>
+        <div class="center">
+            <button class="submit-btn" onclick="checkAnswer()">Submit</button>
+        </div>
+        <div class="center">
+            <p class="result" id="result"></p>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "which of the following is not a real Kardasian",
+                options: ["Kourtney", "Katherine", "Robb", "Kimberly"],
+                answer: "Katherine",
+            },
+            {
+                question: "Which album won Album of the year at the Grammys this year",
+                options: ["SOS", "Midnights", "Guts", "Folklore"],
+                answer: "Midnights",
+            },
+            {
+                question:
+                    "the lyric 'i was so ahead of the curve,the curve became a sphere' is from which song ",
+                options: [
+                    "cardigan",
+                    "this is me trying",
+                    "the lakes",
+                    "my tears ricochet",
+                ],
+                answer: "this is me trying",
+            },
+            {
+                question: "Where was the popstar Taylor swift born?",
+                options: ["Tennessee", "New York", "pennsylvania", "None of the above"],
+                answer: "pennsylvania",
+            },
+        ];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        function displayQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question").textContent =
+                currentQuestion.question;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            currentQuestion.options.forEach((option) => {
+                const optionDiv = document.createElement("div");
+                optionDiv.className = "answer-option";
+                const radioBtn = document.createElement("input");
+                radioBtn.type = "radio";
+                radioBtn.name = "answer";
+                radioBtn.value = option;
+                radioBtn.className = "answer-radio";
+                optionDiv.appendChild(radioBtn);
+                const optionLabel = document.createElement("label");
+                optionLabel.textContent = option;
+                optionDiv.appendChild(optionLabel);
+                optionsDiv.appendChild(optionDiv);
+            });
+        }
+        function checkAnswer() {
+            const selectedOption = document.querySelector(
+                'input[name="answer"]:checked'
+            );
+            if (!selectedOption) {
+                alert("Please select an option.");
+                return;
+            }
+            const userAnswer = selectedOption.value.trim();
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+        function endQuiz() {
+            document.getElementById("question").textContent =
+                "Answered 4/4 questions";
+            document.getElementById("result").textContent =
+                "Score: " + score + " out of " + questions.length;
+            document.getElementById("options").innerHTML = "";
+            document.querySelector(".submit-btn").style.display = "none";
+        }
+        displayQuestion();
+    </script>
+</body>
+
+</html>

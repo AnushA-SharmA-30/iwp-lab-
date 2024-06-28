@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>To-Do List</title>
+ <style>
+ body {
+ margin: 10;
+ padding: 10;
+ background-color: #fdb8fe;
+ }
+ .todo-container {
+ color: black;
+ max-width: 600px;
+ margin: 200px auto;
+ padding: 20px;
+ background-color: #2e8cc2;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(105, 101, 101, 0.1);
+ }
+ h1 {
+ text-align: center;
+ color: #4f070e;
+ }
+ #taskInput {
+ width: calc(100% - 80px);
+ padding: 8px;
+ margin-bottom: 10px;
+ box-shadow: 0 0 10px rgba(105, 101, 101, 0.1);
+ }
+ #addTaskBtn {
+ padding: 8px 20px;
+ border: none;
+ background-color: rgb(47, 92, 255);
+ color: rgb(187, 237, 255);
+ border-radius: 4px;
+ cursor: pointer;
+ margin-bottom: 10px;
+ }
+ .task-item {
+ list-style-type: none;
+ margin-bottom: 5px;
+ }
+ .task-item span {
+ margin-left: 10px;
+ }
+ .task-item input[type="checkbox"] {
+ margin-right: 5px;
+ }
+ </style>
+ </head>
+ <body>
+ <div class="todo-container">
+ <h1>To-Do List</h1>
+ <input type="text" id="taskInput" placeholder="Enter task..." />
+ <button id="addTaskBtn">Add Task</button>
+ <ul id="taskList"></ul>
+ </div>
+ <script>
+ const taskInput = document.getElementById("taskInput");
+ const addTaskBtn = document.getElementById("addTaskBtn");
+ const taskList = document.getElementById("taskList");
+ function createTaskItem(taskContent) {
+ const li = document.createElement("li");
+ li.classList.add("task-item");
+ const checkbox = document.createElement("input");
+ checkbox.type = "checkbox";
+ const taskText = document.createElement("span");
+ taskText.textContent = taskContent;
+ li.appendChild(checkbox);
+ li.appendChild(taskText);
+ taskList.appendChild(li);
+ checkbox.addEventListener("change", () => {
+ if (checkbox.checked) {
+ li.remove();
+ }
+ });
+ }
+ addTaskBtn.addEventListener("click", () => {
+ const taskContent = taskInput.value.trim();
+ if (taskContent !== "") {
+ createTaskItem(taskContent);
+ taskInput.value = "";
+ } else {
+ alert("Please enter a task.");
+ }
+ });
+ </script>
+ </body>
+</html>

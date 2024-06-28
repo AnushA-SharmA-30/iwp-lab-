@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Interactive Complex Number Operations</title>
+ <script>
+ function performOperations() {
+ const real1 = parseFloat(document.getElementById("real1").value) || 0;
+ const imag1 = parseFloat(document.getElementById("imag1").value) || 0;
+ const real2 = parseFloat(document.getElementById("real2").value) || 0;
+ const imag2 = parseFloat(document.getElementById("imag2").value) || 0;
+ const complexNumber1 = { real: real1, imag: imag1 };
+ const complexNumber2 = { real: real2, imag: imag2 };
+ const additionResult = addComplexNumbers(
+ complexNumber1,
+ complexNumber2
+ );
+ const subtractionResult = subtractComplexNumbers(
+ complexNumber1,
+ complexNumber2
+ );
+ const multiplicationResult = multiplyComplexNumbers(
+ complexNumber1,
+ complexNumber2
+ );
+ const resultsDiv = document.getElementById("results");
+ resultsDiv.innerHTML =
+ "<p>Addition: " +
+ additionResult.real +
+ " + " +
+ additionResult.imag +
+ "i</p>" +
+ "<p>Subtraction: " +
+ subtractionResult.real +
+ " + " +
+ subtractionResult.imag +
+ "i</p>" +
+ "<p>Multiplication: " +
+ multiplicationResult.real +
+ " + " +
+ multiplicationResult.imag +
+ "i</p>";
+ }
+ function addComplexNumbers(complex1, complex2) {
+ return {
+ real: complex1.real + complex2.real,
+ imag: complex1.imag + complex2.imag,
+ };
+ }
+ function subtractComplexNumbers(complex1, complex2) {
+ return {
+ real: complex1.real - complex2.real,
+ imag: complex1.imag - complex2.imag,
+ };
+ }
+ function multiplyComplexNumbers(complex1, complex2) {
+ return {
+ real: complex1.real * complex2.real - complex1.imag * complex2.imag,
+ imag: complex1.real * complex2.imag + complex1.imag * complex2.real,
+ };
+ }
+ </script>
+ <style>
+ .center {
+ display: flex;
+ justify-content: center;
+ }
+ .complex{
+ margin-top: 125px ;
+ border-radius: 20px;
+ padding:30px;
+ box-shadow: 0px 0px 10px rgb(110, 58, 58);
+ background-color: rgb(42, 165, 165);
+ color: rgb(1, 1, 36);
+ }
+ </style>
+ </head>
+ <body class="center">
+ <div class="complex">
+ <h2>Interactive Complex Number Operations</h2>
+ <label for="real1">Real Part 1:</label>
+ <input type="number" id="real1" placeholder="Enter real part" />
+ <label for="imag1">Imaginary Part 1:</label>
+ <input type="number" id="imag1" placeholder="Enter imaginary part" />
+ <br /><br />
+ <label for="real2">Real Part 2:</label>
+ <input type="number" id="real2" placeholder="Enter real part" />
+ <label for="imag2">Imaginary Part 2:</label>
+ <input type="number" id="imag2" placeholder="Enter imaginary part" />
+ <br /><br />
+ <button onclick="performOperations()">Perform Operations</button>
+ <h3>Results:</h3>
+ <div id="results"></div>
+ </div>
+ </body>
+</html>

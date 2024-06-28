@@ -1,0 +1,78 @@
+<!DOCTYPE html><html>
+    <head>
+        <meta charset="UTF-8"><meta name="viewport" content="width:device-width" initial-scale="1.0">
+        <title>Sign up page</title>
+        <style>
+            .signup-container{
+                width: 300px;
+                margin: 50px;
+                padding:20px;
+                background-color: rgb(81, 226, 226);
+                border: 1px solid #d1b2e0;
+                border-radius: 8px;
+            }
+            table{
+                width:100%;
+
+            }
+            td{
+                padding: 8px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"]{
+                width: 94%;
+                padding: 10px;
+                border: 1px solid #f3a6b9;
+                border-radius: 4px;
+            }
+            input[type="submit"]{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                background-color: #ffa500;
+                border-radius: 4px;
+                color:rgb(255, 255, 255) ;
+                cursor:pointer;
+            }
+            input[type="submit"]:hover{
+                background-color: mediumslateblue;
+            }
+            h2{
+                text-align: center;
+                color: #333;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="signup-container" style=" margin: 50px 400px 0px 600px;">
+            <h2>Sign up today</h2>
+            <form action="/submit-your-form" method="post">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" required></td>
+
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input type="email" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td>password:</td>
+                        <td><input type="password" name="password" required></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm password:</td>
+                        <td><input type="password" name="confirm-password" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Register"></td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

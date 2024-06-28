@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>
+            NUCAT exam Registration Form
+        </title>
+        <script>
+            function displayExamDetails(){
+                var name=document.getElementById('name').value;
+                var email=document.getElementById('email').value;
+                var mobile=document.getElementById('mobile').value;
+                var examMode=document.querySelector('input[name="exam-mode"]:checked').value;
+                var feesPaid=document.getElementById('fees-paid').value;
+                var examDetails="Registration details\n";
+                examDetails+="Name:"+name+"\n";
+                examDetails+="Email ID:"+email+"\n";
+                examDetails+="Mobile:"+mobile+"\n";
+                examDetails+="Exam Mode:"+examMode+"\n";
+                if(feesPaid>=100){
+                    examDetails+="Exam Details:you are registered for the standard NUCAT Exam.\n";
+
+                }else{
+                    examDetails+="Exam Details:Fees paid are insufficent for registration.\n";
+
+                }
+               
+                alert(examDetails);
+
+            } 
+        </script>
+    </head>
+    <body><fieldset>
+     <legend> <h2>
+            NUCAT exam Registration form </h2></legend>
+            <form onsubmit="event.preventDefault();
+            displayExamDetails();">
+            <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br><br>
+            <label for="mobile">Mobile:</label>
+            <input type="tel" id="mobile" required><br><br>
+            <span>Exam Mode:</span><br>
+            <input type="radio" id="online" name="exam-mode" value="online" checked>
+            <label for="online" > Online</label><br>
+            <input type="radio" id="offline" name="exam-mode" value="offline">
+            <label for="offline">Offline</label><br><br>
+            <label for="fees-paid">Fees Paid:</label>
+            <input type="number" id="fees-paid" required><br><br>
+            <input type="submit" value="Register">
+            <p id="demo"></p>
+
+
+    </form></fieldset>
+    </body>
+
+</html>
+

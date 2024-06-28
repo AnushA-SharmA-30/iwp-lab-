@@ -1,0 +1,178 @@
+>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz Page</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        background-color: #ecebeb;
+    }
+
+    .container {
+        margin-top: 100px;
+        padding: 20px;
+        background-color: rgb(245, 245, 245);
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: black;
+    }
+
+    .question {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+    }
+
+    .answer-options {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .answer-option {
+        /* display: flex; */
+        /* align-items: center; */
+        margin-bottom: 20px;
+        background-color: rgb(255, 255, 255);
+        width: 200px;
+        padding: 10px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .answer-option input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    .submit-btn {
+        display: flex;
+        justify-content: center;
+        padding: 8px 20px;
+        border: none;
+        background-color: rgb(0, 102, 255);
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .result {
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quiz</h1>
+        <p class="question" id="question"></p>
+        <div class="options">
+            <div class="answer-options" id="options"></div>
+        </div>
+        <div class="center">
+            <button class="submit-btn" onclick="checkAnswer()">Submit</button>
+        </div>
+        <div class="center">
+            <p class="result" id="result"></p>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "who said 'The One Piece is real'?",
+                options: ["Gol D. Roger", "Edward Newgate", "Umesh", "Naruto"],
+                answer: "Edward Newgate",
+            },
+            {
+                question: "The person who named Naruto is ___________.",
+                options: ["Minato", "Kushina", "Jiraya", "Zoro"],
+                answer: "Jiraya",
+            },
+            {
+                question:
+                    "The correct continuation to the lyrics 'WHAT IS LOVE?...' is ",
+                options: [
+                    "baby dont hurt me",
+                    "whatchu know about rollin down",
+                    "BLING BANG BANG BLING BANG BANG",
+                    "whistle baby whistle baby...",
+                ],
+                answer: "baby dont hurt me",
+            },
+            {
+                question: "In which year did the series 'One piece' start?",
+                options: ["1997", "2000", "2020", "None of the above"],
+                answer: "1997",
+            },
+        ];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        function displayQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question").textContent =
+                currentQuestion.question;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            currentQuestion.options.forEach((option) => {
+                const optionDiv = document.createElement("div");
+                optionDiv.className = "answer-option";
+                const radioBtn = document.createElement("input");
+                radioBtn.type = "radio";
+                radioBtn.name = "answer";
+                radioBtn.value = option;
+                radioBtn.className = "answer-radio";
+                optionDiv.appendChild(radioBtn);
+                const optionLabel = document.createElement("label");
+                optionLabel.textContent = option;
+                optionDiv.appendChild(optionLabel);
+                optionsDiv.appendChild(optionDiv);
+            });
+        }
+        function checkAnswer() {
+            const selectedOption = document.querySelector(
+                'input[name="answer"]:checked'
+            );
+            if (!selectedOption) {
+                alert("Please select an option.");
+                return;
+            }
+            const userAnswer = selectedOption.value.trim();
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+        function endQuiz() {
+            document.getElementById("question").textContent =
+                "Answered 4/4 questions";
+            document.getElementById("result").textContent =
+                "Score: " + score + " out of " + questions.length;
+            document.getElementById("options").innerHTML = "";
+            document.querySelector(".submit-btn").style.display = "none";
+        }
+        displayQuestion();
+    </script>
+</body>
+
+</html>
